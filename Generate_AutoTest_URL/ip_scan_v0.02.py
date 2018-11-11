@@ -14,7 +14,10 @@ patt_judge_type = r'[6,8,9]\d\d\w*'
 # 从mac_list文件中读取mac和model，允许没有model，字典中value为None
 with open('mac_list.txt') as f_obj:
     for eachline in f_obj:
-        judge_type = re.search(patt_judge_type, eachline[-5:-1])
+        if len(eachline) <= 17:
+            judge_type = None
+        else:
+            judge_type = re.search(patt_judge_type, eachline[-5:-1])
         result = re.search(patt_mac, eachline)
         # 将result--mac作为key，因为mac不会重复，而model会重复，以免key重复，将值覆盖
         if (judge_type is not None) and (result is not None):

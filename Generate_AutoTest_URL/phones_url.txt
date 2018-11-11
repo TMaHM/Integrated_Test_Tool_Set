@@ -4,3 +4,4 @@ URL3"http://10.3.3.54/AutoTest&"	#912E	00-1F-C1-1D-66-85
 URL4"http://10.3.3.55/AutoTest&"	#912E	00-1F-C1-1D-2C-DC
 URL5"http://10.3.3.56/AutoTest&"	#902	00-1F-C1-1D-2C-E8
 URL6"http://10.3.3.60/AutoTest&"	#926E	00-1F-C1-1D-76-D0
+URL7"http://10.3.2.201/AutoTest&"	#		00-1F-C1-B0-D9-90
