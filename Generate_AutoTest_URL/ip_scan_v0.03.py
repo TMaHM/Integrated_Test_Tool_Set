@@ -1,7 +1,9 @@
 import re
 
-import generate_function as gf
+import generatefunction as gf
 
+phones_mac = input("please enter your mac recording file")
+phones_ip = 'IPMac.txt'
 
-
-gf.read_mac()
+gf.read_mac(phones_mac)
+gf.read_ip(phones_ip)

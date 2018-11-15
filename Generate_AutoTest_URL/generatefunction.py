@@ -7,6 +7,7 @@ patt_mac = r'00[-:]?1\w[-:]?\w1[-:]?\w\w[-:]?\w\w[-:]?\w\w'
 patt_judge_model = r'[6,8,9]\d\d\w*'
 
 
+
 def read_mac(phones_mac):
     with open(phones_mac) as f_obj:
         for eachline in f_obj:
@@ -30,9 +31,10 @@ def read_mac(phones_mac):
                     ip_mac_dir[mac] = model
                 except TypeError:
                     pass
+        return ip_mac_dir
 
 
-def get_ip():
+def get_ip(phones_ip):
     patt_format = r'^00-1\w-\w1-\w\w-\w\w-\w\w'
     patt_grouping = r'(00)[:-]?(1\w)[:-]?(\w1)[:-]?(\w\w)[:-]?(' \
                         r'\w\w)[:-]?(\w\w)[:-]?'
@@ -50,7 +52,7 @@ def get_ip():
             del ip_mac_dir[key]
             ip_mac_dir[mac] = value
 
-    with open('IPMac.txt') as f:
+    with open(phones_ip) as f:
         counts = 0
         for eachline in f:
             read_mac = re.search(patt_mac, eachline)
@@ -70,3 +72,9 @@ def get_ip():
                                + "\t#" + "\t" + '\t' + mac)
                         url_list.append(url)
                         counts += 1
+
+
+def generate(result, counts):
+    with open(result, 'w') as f:
+        for count, url in zip(range(1, counts + 1), url_list):
+            f.write("URL" + str(count) + url + "\n")
