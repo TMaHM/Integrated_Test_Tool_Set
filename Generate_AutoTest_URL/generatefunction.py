@@ -1,11 +1,9 @@
 import re
 
-
 ip_mac_dir = {}
 url_list = []
 patt_mac = r'00[-:]?1\w[-:]?\w1[-:]?\w\w[-:]?\w\w[-:]?\w\w'
 patt_judge_model = r'[6,8,9]\d\d\w*'
-
 
 
 def read_mac(phones_mac):
@@ -34,11 +32,11 @@ def read_mac(phones_mac):
         return ip_mac_dir
 
 
-def get_ip(phones_ip):
-    patt_format = r'^00-1\w-\w1-\w\w-\w\w-\w\w'
-    patt_grouping = r'(00)[:-]?(1\w)[:-]?(\w1)[:-]?(\w\w)[:-]?(' \
-                        r'\w\w)[:-]?(\w\w)[:-]?'
+patt_format = r'^00-1\w-\w1-\w\w-\w\w-\w\w'
+patt_grouping = r'(00)[:-]?(1\w)[:-]?(\w1)[:-]?(\w\w)[:-]?(' \
+                    r'\w\w)[:-]?(\w\w)[:-]?'
 
+def get_ip(phones_ip, ip_mac_dir):
     for key, value in ip_mac_dir.items():
         formatted = re.match(patt_format, key)
         format_mac = re.match(patt_grouping, key)
@@ -51,6 +49,7 @@ def get_ip(phones_ip):
                 5).upper() + '-' + format_mac.group(6).upper()
             del ip_mac_dir[key]
             ip_mac_dir[mac] = value
+
 
     with open(phones_ip) as f:
         counts = 0
@@ -72,6 +71,7 @@ def get_ip(phones_ip):
                                + "\t#" + "\t" + '\t' + mac)
                         url_list.append(url)
                         counts += 1
+    return counts
 
 
 def generate(result, counts):
